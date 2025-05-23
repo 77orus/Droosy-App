@@ -221,7 +221,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (selectedRole == UserRole.teacher) {
         Get.offAllNamed(AppRoutes.teacherHome);
       } else if (selectedRole == UserRole.student) {
-        Get.offAllNamed(AppRoutes.home);
+        Get.offAllNamed(AppRoutes.main);
       } else if (selectedRole == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

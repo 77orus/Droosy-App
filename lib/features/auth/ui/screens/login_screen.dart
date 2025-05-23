@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleLoginLogic() {
     if (_formKey.currentState!.validate()) {
-      Get.offAllNamed(AppRoutes.home);
+      Get.offAllNamed(AppRoutes.main);
     }
   }
 
@@ -108,7 +108,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.forgotPassword);
+                            },
                             child: Text(
                               "Forgot Password?",
                               style: TextStyle(
