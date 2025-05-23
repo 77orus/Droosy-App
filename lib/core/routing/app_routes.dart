@@ -1,5 +1,7 @@
 import 'package:droosy_app/features/auth/ui/screens/login_screen.dart';
 import 'package:droosy_app/features/auth/ui/screens/register_screen.dart';
+import 'package:droosy_app/features/home/ui/screens/default_home_screen.dart';
+import 'package:droosy_app/features/home/ui/screens/teacher_home_screen.dart';
 import 'package:droosy_app/features/on_boarding/ui/screens/on_boarding_screen.dart';
 import 'package:droosy_app/features/splash/ui/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,11 @@ class AppRoutes {
   static const String register = '/register';
   static const String home = '/home';
 
+
+
+  // Teacher Routes
+  static const String teacherHome = '/teacherHome';
+
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case splash:
@@ -21,6 +28,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       case register:
         return MaterialPageRoute(builder: (_) => const RegisterScreen());
+      case home:
+        return MaterialPageRoute(builder: (_) => const DefaultHomeScreen());
+      case teacherHome:
+        return MaterialPageRoute(builder: (_) => TeacherHomeScreen());
       default:
         return MaterialPageRoute(
           builder:

@@ -1,4 +1,5 @@
 import 'package:droosy_app/core/routing/app_routes.dart';
+import 'package:droosy_app/core/services/storage_service.dart';
 import 'package:droosy_app/core/themes/app_colors.dart';
 import 'package:droosy_app/features/on_boarding/models/on_boarding_model.dart';
 import 'package:droosy_app/features/on_boarding/ui/widgets/on_boarding_page_widget.dart';
@@ -37,6 +38,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   ];
   int currentIndex = 0;
 
+  void checkOnBoardingCompleted() async {
+    await StorageService.setFirstTime(false);
+    Get.offAllNamed(AppRoutes.login);
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +80,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              onPressed: () => Get.offAllNamed(AppRoutes.login),
+              onPressed: () {
+                checkOnBoardingCompleted();
+              },
             ),
           ),
           //! Indicator and Button
@@ -94,7 +108,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ElevatedButton(
                   onPressed: () {
                     if (currentIndex == onBoardingItems.length - 1) {
-                      Get.offAllNamed(AppRoutes.login);
+                      checkOnBoardingCompleted();
                     } else {
                       pageController.nextPage(
                         duration: const Duration(milliseconds: 300),

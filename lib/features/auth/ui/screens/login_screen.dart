@@ -1,10 +1,34 @@
 import 'package:droosy_app/core/routing/app_routes.dart';
+import 'package:droosy_app/core/utils/validators.dart';
+import 'package:droosy_app/core/widgets/custom_text_form_field.dart';
 import 'package:droosy_app/features/auth/ui/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void _handleLoginLogic() {
+    if (_formKey.currentState!.validate()) {
+      Get.offAllNamed(AppRoutes.home);
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,58 +79,56 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
-                  SizedBox(height: 10),
-                  //! Email Field
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                      prefixIcon: Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey.shade300),
-                      ),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        //! Email Field
+                        const SizedBox(height: 20),
+                        CustomTextFormField(
+                          label: 'Email',
+                          hintText: 'Enter your email',
+                          textInputType: TextInputType.emailAddress,
+                          prefixIcon: Icons.email_outlined,
+                          controller: _emailController,
+                          validator: FormValidators.validateEmail,
+                        ),
+                        const SizedBox(height: 20),
+                        CustomTextFormField(
+                          label: 'Password',
+                          hintText: 'Enter your password',
+                          obscureText: true,
+                          textInputType: TextInputType.visiblePassword,
+                          prefixIcon: Icons.lock_outlined,
+
+                          controller: _passwordController,
+                          validator: FormValidators.validatePassword,
+                        ),
+                        //! ForgotPassword Button
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        //! Login Button
+                        CustomButton(
+                          text: 'Login',
+                          onPressed: () {
+                            _handleLoginLogic();
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 20),
-                  //! Password Field
-                  TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      suffixIcon: Icon(Icons.remove_red_eye),
-                      prefixIcon: Icon(Icons.lock_outline),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(color: Colors.grey.shade300),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  //! ForgotPassword Button
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Forgot Password?",
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  //! Login Button
-                  CustomButton(
-                    text: 'Login',
-                    onPressed: () {
-                      // Todo:: Implement Login Logic
-                    },
-                  ),
+
                   SizedBox(height: 20),
                   //! Or Continue With
                   Row(

@@ -60,7 +60,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 ? IconButton(
                   onPressed: () {},
                   icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                    _obscureText
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
                   ),
                 )
                 : widget.suffixIcon != null
