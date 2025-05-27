@@ -1,4 +1,3 @@
-import 'package:droosy_app/core/routing/app_routes.dart';
 import 'package:droosy_app/core/themes/app_colors.dart';
 import 'package:droosy_app/features/on_boarding/models/on_boarding_model.dart';
 import 'package:flutter/material.dart';
