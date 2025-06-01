@@ -8,7 +8,7 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return SliverAppBar(
-      expandedHeight: 180,
+      expandedHeight: 200,
       backgroundColor: AppColors.primary,
       pinned: true,
       floating: false,

@@ -1,7 +1,9 @@
 import 'package:droosy_app/features/auth/ui/screens/forgot_password_Screen.dart';
 import 'package:droosy_app/features/auth/ui/screens/login_screen.dart';
 import 'package:droosy_app/features/auth/ui/screens/register_screen.dart';
+import 'package:droosy_app/features/courses/ui/screens/course_details_screen.dart';
 import 'package:droosy_app/features/courses/ui/screens/courses_screen.dart';
+import 'package:droosy_app/features/courses/ui/screens/payment_screen.dart';
 import 'package:droosy_app/features/home/ui/screens/default_home_screen.dart';
 import 'package:droosy_app/features/home/ui/screens/teacher_home_screen.dart';
 import 'package:droosy_app/features/on_boarding/ui/screens/on_boarding_screen.dart';
@@ -29,6 +31,8 @@ class AppRoutes {
 
   // Courses
   static const String courses = '/courses';
+  static const String courseDetails = '/courseDetails';
+  static const String payment = '/payment';
 
   // Profile
   static const String profile = '/profile';
@@ -62,12 +66,16 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const QuizzesScreen());
       case courses:
         return MaterialPageRoute(builder: (_) => const CoursesScreen());
+      case courseDetails:
+        return MaterialPageRoute(builder: (_) => const CourseDetailsScreen());
+      case payment:
+        return MaterialPageRoute(builder: (_) => const PaymentScreen());  
       case profile:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case home:
         return MaterialPageRoute(builder: (_) => const DefaultHomeScreen());
       case teacherHome:
-        return MaterialPageRoute(builder: (_) => TeacherHomeScreen());
+        return MaterialPageRoute(builder: (_) => const TeacherHomeScreen());
       default:
         return MaterialPageRoute(
           builder:
